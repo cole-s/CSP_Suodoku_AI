@@ -92,4 +92,26 @@ class Constraints {
         this.vertical[rowindex][colindex].removeAvailable(number);
         this.box[rowindex][colindex].removeAvailable(number);
     } // end of removeMove
+
+    public void updateValidMoves(int row, int col, int num) {
+        if(this.horizontal[row][col].updateValidMoves(num)) {
+            for(int index = 0; index < MAX_SIZE; index++) {
+                if(index != col) {
+                    this.horizontal[row][index].getAvailable()[num] = -1;
+                }
+            }
+        }
+
+        if(this.vertical[row][col].updateValidMoves(num)) {
+            for(int index = 0; index < MAX_SIZE; index++) {
+                if(index != row) {
+                    this.vertical[index][col].getAvailable()[num] = -1;
+                }
+            }
+        }
+
+        if(this.box[row][col].updateValidMoves(num)) {
+          
+        }
+    }
 } // end of Constraints Class

@@ -39,5 +39,5 @@ public class Control {
 
     public static void printBoard() {
         root.printBoard();
-    }
+    } // end of printBoard
 } // end of Control Class

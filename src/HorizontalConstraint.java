@@ -35,4 +35,15 @@ class HorizontalConstraint {
     public void removeAvailable(int index) {
         this.available[index] = -1;
     } // end of removeAvailable
+
+    public boolean updateValidMoves(int num) {
+        if(num < 0) {
+            for(int index = 0; index < MAX_SIZE; index++) {
+                this.available[index] = -1;
+            }
+            return true;
+        }
+
+        return false;
+    }
 } // end of HorizontalConstrant Class
