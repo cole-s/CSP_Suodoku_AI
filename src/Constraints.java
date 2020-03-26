@@ -5,10 +5,14 @@ Controls all of the different types of constrants needed for the AI to function
 */
 
 class Constraints {
-    private final int MAX_SIZE = 9;
+    private final int MAX_SIZE = 9; // max size of board
+
+    // constraints for each spot on board
     private HorizontalConstraint[][] horizontal;
     private VerticalConstraint[][] vertical;
     private BoxConstraint[][] box;
+
+    // Helper Variables for the box constraints
     // Boxes 1 - 3
     private final int BOX1_ROW_START = 0;
     private final int BOX1_COL_START = 0;
@@ -70,9 +74,9 @@ class Constraints {
         this.setHorizontal(con.getHorizontal());
         this.setVertical(con.getVertical());
         this.setBox(con.getBox());
-    }
+    } // end of constructor
 
-    // help constructor methods:
+    // helper constructor methods:
 
     private void constructHorizontal() {
         this.horizontal = new HorizontalConstraint[MAX_SIZE][MAX_SIZE];
@@ -106,6 +110,8 @@ class Constraints {
 
     // end of help constructor methods
 
+
+    // Getters and Setter (By val)
     public HorizontalConstraint[][] getHorizontal() { return this.horizontal; }
     public VerticalConstraint[][] getVertical() { return this.vertical; }
     public BoxConstraint[][] getBox() { return this.box; }
@@ -133,6 +139,15 @@ class Constraints {
         } // end of for loop
     } // end of setBox
 
+    // End of Getters and Setters
+
+    /**
+     * Method: getAvailableMoveList
+     * Purpose: returns a list of all possible numbers able tp be placed given a location
+     * @param row - which row spot is located
+     * @param col - which column spot is located
+     * @return int[] - containing list of valid moves
+     */
     public int[] getAvailableMoveList(int row, int col) {
         int[] available = new int[MAX_SIZE];
         for(int num = 1; num <= MAX_SIZE; num++) {
@@ -140,35 +155,50 @@ class Constraints {
                 if(this.vertical[row][col].getAvailable()[num-1] > 0) {
                     if(this.box[row][col].getAvailable()[num-1] > 0) {
                         available[num-1] = num;
-                    }
-                }
-            }
-        }
+                    } // end of if statement
+                } // end of if statement
+            } // end of if statement
+        } // end of for loop
 
         return available;
     } // end of countAvailableMoves
 
-    public void removeMove(int rowindex, int colindex, int number) {
-        this.horizontal[rowindex][colindex].removeAvailable(number);
-        this.vertical[rowindex][colindex].removeAvailable(number);
-        this.box[rowindex][colindex].removeAvailable(number);
+    /**
+     * Method: removeMove
+     * Purpose: removes the move given a location and which number to remove from valid move list
+     * @param row - row which spot is located
+     * @param col - column which spot is located
+     * @param number - number to remove from valid move list
+     */
+    public void removeMove(int row, int col, int number) {
+        this.horizontal[row][col].removeAvailable(number);
+        this.vertical[row][col].removeAvailable(number);
+        this.box[row][col].removeAvailable(number);
     } // end of removeMove
 
+    /**
+     * Method: updateValidMoves
+     * Purpose: Updates all the corresponding spots affected by the adding of a number to the board
+     * @param row - row which number was placed
+     * @param col - column which number was placed
+     * @param num - number that was added to the board
+     */
     public void updateValidMoves(int row, int col, int num) {
-        for (int index = 0; index < MAX_SIZE; index++) {
+        for (int index = 0; index < MAX_SIZE; index++) { // go through horizontal constraints
             if (index != col) {
                 this.horizontal[row][index].removeAvailable(num);
-            }
-        }
+            } // end of if statement
+        } // end of for loop
 
-        for (int index = 0; index < MAX_SIZE; index++) {
+        for (int index = 0; index < MAX_SIZE; index++) { // go thorough vertical constraints
             if (index != row) {
                 this.vertical[index][col].removeAvailable(num);
-            }
-        }
+            } // end of if statement
+        } // end of for loop
 
 
-        int boxrowstart, boxrowend, boxcolstart, boxcolend;
+        // go through box constraints
+        int boxrowstart, boxrowend, boxcolstart, boxcolend; // to track location of box
         if (row < 3) {
             if (col < 3) { // box 1
                 boxrowstart = BOX1_ROW_START;
@@ -185,7 +215,7 @@ class Constraints {
                 boxrowend = BOX3_ROW_END;
                 boxcolstart = BOX3_COL_START;
                 boxcolend = BOX3_COL_END;
-            }
+            } // end of if-else statements
         } else if (row < 6) {
             if (col < 3) { // box 4
                 boxrowstart = BOX4_ROW_START;
@@ -202,7 +232,7 @@ class Constraints {
                 boxrowend = BOX6_ROW_END;
                 boxcolstart = BOX6_COL_START;
                 boxcolend = BOX6_COL_END;
-            }
+            } // end of if- else statements
         } else {
             if (col < 3) { // box 7
                 boxrowstart = BOX7_ROW_START;
@@ -219,18 +249,17 @@ class Constraints {
                 boxrowend = BOX9_ROW_END;
                 boxcolstart = BOX9_COL_START;
                 boxcolend = BOX9_COL_END;
-            }
-        }
+            } // end of if-else statements
+        } // end of if-else statements
 
         for (int rowindex = boxrowstart; rowindex <= boxrowend; rowindex++) {
             if (rowindex != row) {
                 for (int colindex = boxcolstart; colindex <= boxcolend; colindex++) {
                     if (colindex != col) {
                         this.box[rowindex][colindex].removeAvailable(num);
-                    }
-                }
-            }
-        }
-
-    }
+                    } // end of if statement
+                } // end of for loop
+            } // end of if statement
+        } // end of for loop
+    } // end of updateValidMoves
 } // end of Constraints Class

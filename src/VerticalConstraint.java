@@ -1,3 +1,8 @@
+/**
+ * @author Cole Schaar
+ * Purpose: keeps track of vertical constraints on a spot
+ */
+
 class VerticalConstraint {
     private final int MAX_SIZE = 9;
     private int[] available;
@@ -22,17 +27,10 @@ class VerticalConstraint {
         } // end of for loop
     } // end of setAvailable
 
-    public int countAvailable() {
-        int count = 0;
-        for(int index = 0; index < MAX_SIZE; index++) {
-            if(this.available[index] != -1)
-                count++;
-            // end of if statement
-        } // end of for loop
-
-        return count;
-    } // end of countAvailable
-
+    /**
+     * Method: removeAvailable
+     * @param index - which number to be removed from available list
+     */
     public void removeAvailable(int index) {
         this.available[index] = -1;
     } // end of removeAvailable
