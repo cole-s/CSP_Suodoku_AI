@@ -9,6 +9,53 @@ class Constraints {
     private HorizontalConstraint[][] horizontal;
     private VerticalConstraint[][] vertical;
     private BoxConstraint[][] box;
+    // Boxes 1 - 3
+    private final int BOX1_ROW_START = 0;
+    private final int BOX1_COL_START = 0;
+    private final int BOX1_ROW_END = 2;
+    private final int BOX1_COL_END = 2;
+
+    private final int BOX2_ROW_START = 0;
+    private final int BOX2_COL_START = 3;
+    private final int BOX2_ROW_END = 2;
+    private final int BOX2_COL_END = 5;
+
+    private final int BOX3_ROW_START = 0;
+    private final int BOX3_COL_START = 6;
+    private final int BOX3_ROW_END = 2;
+    private final int BOX3_COL_END = 8;
+
+    // Boxes 4 - 6
+    private final int BOX4_ROW_START = 3;
+    private final int BOX4_COL_START = 0;
+    private final int BOX4_ROW_END = 5;
+    private final int BOX4_COL_END = 2;
+
+    private final int BOX5_ROW_START = 3;
+    private final int BOX5_COL_START = 3;
+    private final int BOX5_ROW_END = 5;
+    private final int BOX5_COL_END = 5;
+
+    private final int BOX6_ROW_START = 3;
+    private final int BOX6_COL_START = 6;
+    private final int BOX6_ROW_END = 5;
+    private final int BOX6_COL_END = 8;
+
+    // Boxes 7 - 9
+    private final int BOX7_ROW_START = 6;
+    private final int BOX7_COL_START = 0;
+    private final int BOX7_ROW_END = 8;
+    private final int BOX7_COL_END = 2;
+
+    private final int BOX8_ROW_START = 6;
+    private final int BOX8_COL_START = 3;
+    private final int BOX8_ROW_END = 8;
+    private final int BOX8_COL_END = 5;
+
+    private final int BOX9_ROW_START = 6;
+    private final int BOX9_COL_START = 6;
+    private final int BOX9_ROW_END = 8;
+    private final int BOX9_COL_END = 8;
 
     public Constraints() {
         constructHorizontal();
