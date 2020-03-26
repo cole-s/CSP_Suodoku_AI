@@ -1,16 +1,18 @@
 /**
+ * Class: SudokuBoard
  * @author Cole Schaar
+ * CS 481 - Artifical Intelligence
  * Purpose: keeps track of all the constraints, board state, and next move of the puzzle search algorithm
  */
 
-public class SuodokuBoard {
+public class SudokuBoard {
     private final int MAX_SIZE = 9;
     private int[][] board;
-    private SuodokuBoard next;
+    private SudokuBoard next;
     private Constraints constraints;
     private int[][][] validboard; // keeps track of all valid moves a spot has
 
-    public SuodokuBoard() {
+    public SudokuBoard() {
         this.next = null;
         this.constraints = new Constraints();
         this.board = new int[MAX_SIZE][MAX_SIZE];
@@ -23,7 +25,7 @@ public class SuodokuBoard {
         } // end of for loop
     } // end of constructor
 
-    public SuodokuBoard(SuodokuBoard board) {
+    public SudokuBoard(SudokuBoard board) {
         this.board = new int[MAX_SIZE][MAX_SIZE];
         this.validboard = new int[MAX_SIZE][MAX_SIZE][MAX_SIZE];
         this.next = null;
@@ -43,8 +45,8 @@ public class SuodokuBoard {
     public int[][] getBoard() { return this.board; }
     public int[][][] getValidBoard() { return this.validboard; }
     public Constraints getConstraints() { return this.constraints; }
-    public SuodokuBoard getNext() { return this.next; }
-    public void setNext(SuodokuBoard next) { this.next = next; }
+    public SudokuBoard getNext() { return this.next; }
+    public void setNext(SudokuBoard next) { this.next = next; }
     // end of getters and setters
 
     /**

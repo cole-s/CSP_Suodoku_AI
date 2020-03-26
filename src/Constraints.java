@@ -1,6 +1,7 @@
 /**
 Class: Constraints
 @author Cole Schaar
+CS 481 - Artifical Intelligence
 Controls all of the different types of constrants needed for the AI to function
 */
 

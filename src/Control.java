@@ -1,5 +1,7 @@
 /**
+ * Class: Control
  * @author Cole Schaar
+ * CS 481 - Artifical Intelligence
  * Purpose: Controls the CSP functionality and Backtracking for the search Algorithm along with handling user input/files
  */
 
@@ -9,7 +11,7 @@ import java.io.*;
 public class Control {
     private static final int MAX_SIZE = 9; // size of board
     private static Hashtable<String, String> exploredset; // used to avoid duplicate states
-    private static SuodokuBoard root; // first node to search
+    private static SudokuBoard root; // first node to search
 
     /**
      * Method: importBoard
@@ -18,7 +20,7 @@ public class Control {
      * @throws Error - file not found or input is invalid from file
      */
     public static void importBoard(String filename) throws Error {
-        root = new SuodokuBoard();
+        root = new SudokuBoard();
         File infile;
         BufferedReader br;
         try {
@@ -64,7 +66,7 @@ public class Control {
      * @param node - current board state being searched through
      * @return boolean - true if solved - false if not solved
      */
-    private static boolean recSolving(SuodokuBoard node) {
+    private static boolean recSolving(SudokuBoard node) {
         // base cases
         if(exploredset.containsKey(node.boardToString())) {
 //            System.out.println("DUPLICATE");
@@ -111,7 +113,7 @@ public class Control {
             for (int index = 0; index < MAX_SIZE; index++) {
                 if(node.getValidBoard()[rowleast][colleast][index] > 0) {
                     // make next node move here
-                    node.setNext(new SuodokuBoard(node));
+                    node.setNext(new SudokuBoard(node));
                     move = node.getValidBoard()[rowleast][colleast][index];
                     node.getNext().setBoardValueAt(rowleast, colleast, move);
                     node.getValidBoard()[rowleast][colleast][index] = -1;
@@ -131,7 +133,7 @@ public class Control {
      * @param node - current board state to be checked if all spots are filled
      * @return boolean - true if filled - false if not
      */
-    private static boolean isSolved(SuodokuBoard node) {
+    private static boolean isSolved(SudokuBoard node) {
         for(int row = 0; row < MAX_SIZE; row++) {
             for(int col = 0; col < MAX_SIZE; col++) {
                 if(node.getBoard()[row][col] == 0) {

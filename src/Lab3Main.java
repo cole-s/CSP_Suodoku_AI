@@ -1,4 +1,5 @@
 /**
+ * Class: Main
  * @author Cole Schaar
  * Purpose: Runs the code to solve the program
  */

@@ -1,5 +1,7 @@
 /**
+ * Class: VerticalConstraint
  * @author Cole Schaar
+ * CS 481 - Artifical Intelligence
  * Purpose: keeps track of vertical constraints on a spot
  */
 

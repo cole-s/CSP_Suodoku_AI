@@ -1,5 +1,7 @@
 /**
+ * Class: HorizontalConstraint
  * @author Cole Schaar
+ * CS 481 - Artifical Intelligence
  * Purpose: keeps track of horizontial constraints on a spot
  */
 

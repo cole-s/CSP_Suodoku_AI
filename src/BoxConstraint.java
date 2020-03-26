@@ -1,5 +1,7 @@
 /**
+ * Class: BoxConstraint
  * @author Cole Schaar
+ * CS 481 - Artifical Intelligence
  * Purpose: keeps track of box constraints on a spot
  */
 
