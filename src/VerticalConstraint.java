@@ -16,6 +16,7 @@ class VerticalConstraint {
     // getters and setters for the private variables
     public int[] getAvailable() { return this.available; } // end of getAvailable
     public void setAvailable(int[] available) {
+        this.available = new int[MAX_SIZE];
         for(int index = 0; index < MAX_SIZE; index++){
             this.available[index] = available[index];
         } // end of for loop

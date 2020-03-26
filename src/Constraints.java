@@ -58,10 +58,19 @@ class Constraints {
     private final int BOX9_COL_END = 8;
 
     public Constraints() {
-        constructHorizontal();
-        constructVertical();
-        constructBox();
+        this.constructHorizontal();
+        this.constructVertical();
+        this.constructBox();
     } // end of constructor
+
+    public Constraints(Constraints con) {
+        this.constructHorizontal();
+        this.constructVertical();
+        this.constructBox();
+        this.setHorizontal(con.getHorizontal());
+        this.setVertical(con.getVertical());
+        this.setBox(con.getBox());
+    }
 
     // help constructor methods:
 
@@ -130,7 +139,7 @@ class Constraints {
             if(this.horizontal[row][col].getAvailable()[num-1] > 0) {
                 if(this.vertical[row][col].getAvailable()[num-1] > 0) {
                     if(this.box[row][col].getAvailable()[num-1] > 0) {
-                        available[num-1] = num + 1;
+                        available[num-1] = num;
                     }
                 }
             }
@@ -217,7 +226,7 @@ class Constraints {
             if (rowindex != row) {
                 for (int colindex = boxcolstart; colindex <= boxcolend; colindex++) {
                     if (colindex != col) {
-                        this.box[row][col].removeAvailable(num);
+                        this.box[rowindex][colindex].removeAvailable(num);
                     }
                 }
             }

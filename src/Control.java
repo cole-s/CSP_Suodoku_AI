@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.io.*;
 
@@ -6,11 +5,9 @@ public class Control {
     private static final int MAX_SIZE = 9;
     private static Hashtable<String, String> exploredset;
     private static SuodokuBoard root;
-    private static ArrayList<SuodokuBoard> queue;
 
     public static void importBoard(String filename) throws Error {
         root = new SuodokuBoard();
-        queue = new ArrayList<>();
         File infile;
         BufferedReader br;
         try {
@@ -50,28 +47,61 @@ public class Control {
     private static boolean recSolving(SuodokuBoard node) {
         // base cases
         if(exploredset.containsKey(node.boardToString())) {
+//            System.out.println("DUPLICATE");
             return false;
         } else {
+//            node.printBoard();
+//            System.out.println();
             exploredset.put(node.boardToString(), "E");
         }
         if(isSolved(node)) {
             node.printBoard();
+            System.out.println();
             return true;
         }
         // end of base cases
 
+        int rowleast = 0, colleast = 0, leastmoves = 0;
         for(int row = 0; row < MAX_SIZE; row++) {
             for(int col = 0; col < MAX_SIZE; col++) {
                 if(node.getBoard()[row][col] < 1) {
                     node.getValidBoard()[row][col] = node.getConstraints().getAvailableMoveList(row, col);
                 }
-                System.out.print(node.countValidMoves(row, col) + " ");
             }
-            System.out.println();
         }
-        System.out.println();
 
-        node.printBoard();
+        boolean flag = false;
+        do {
+            leastmoves = 10;
+            for (int row = 0; row < MAX_SIZE; row++) {
+                for (int col = 0; col < MAX_SIZE; col++) {
+                    if (node.getBoard()[row][col] == 0) {
+                        if (node.countValidMoves(row, col) > 0 && (node.countValidMoves(row, col) < leastmoves)) {
+                            leastmoves = node.countValidMoves(row, col);
+                            rowleast = row;
+                            colleast = col;
+                        }
+                    }
+                }
+            }
+//            if(leastmoves == 1) {
+//                node.printBoard();
+//                System.out.println();
+//            }
+            int move = -1;
+            for (int index = 0; index < MAX_SIZE; index++) {
+                if(node.getValidBoard()[rowleast][colleast][index] > 0) {
+                    node.setNext(new SuodokuBoard(node));
+                    move = node.getValidBoard()[rowleast][colleast][index];
+                    node.getNext().setBoardValueAt(rowleast, colleast, move);
+                    node.getValidBoard()[rowleast][colleast][index] = -1;
+                    flag = recSolving(node.getNext());
+                    if(flag) {
+                        return true;
+                    }
+                }
+            }
+        } while (leastmoves != 10);
 
         return false;
     }
